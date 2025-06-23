@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Wait for DB
-echo "Waiting for MySQL..."
-while ! mysqladmin ping -h"db" -u"kanik-snippet" -p"Snippet@1" --silent; do
-    sleep 1
-done
+# echo "Waiting for MySQL..."
+# while ! mysqladmin ping -h"db" -u"kanik-snippet" -p"Snippet@1" --silent; do
+#     sleep 1
+# done
 
 echo "MySQL started"
 
