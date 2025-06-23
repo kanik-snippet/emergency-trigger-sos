@@ -41,10 +41,7 @@ ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    # 'https://www.Emergency Trigger.com',
-    # 'https://Emergency Trigger.com',
-    # 'https://stg.Emergency Trigger.com',
-    # 'https://www.stg.Emergency Trigger.com',
+    'https://emergency-trigger-sos-production.up.railway.app',
     # 'http://182.72.203.255:8058', 
     'http://192.168.137.1:8000',
 ]
@@ -68,11 +65,13 @@ CSRF_TRUSTED_ORIGINS = [
     # 'https://stg.Emergency Trigger.com',  
     # 'https://www.stg.Emergency Trigger.com',  
     # 'http://182.72.203.255:8058',
+    'https://emergency-trigger-sos-production.up.railway.app/',
     'http://192.168.137.1:8000/', 
 ]
 
 # SITE_URL = 'https://Emergency Trigger.com' 
-SITE_URL='http://192.168.137.1:8000'
+# SITE_URL='http://192.168.137.1:8000'
+SITE_URL='https://emergency-trigger-sos-production.up.railway.app'
 # SITE_URL = 'https://stg.Emergency Trigger.com' 
 # SITE_URL = 'http://172.16.6.94:8000'
 # SITE_URL = 'http://172.16.1.247:8000'
