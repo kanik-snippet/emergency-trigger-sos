@@ -1,1 +1,1 @@
-web: gunicorn panic_button.wsgi
+web: ./entrypoint.sh
