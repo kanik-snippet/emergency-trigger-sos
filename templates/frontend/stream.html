@@ -39,9 +39,9 @@ async function checkStream() {
 
         const container = document.getElementById("video-container");
         const status = document.getElementById("status");
-        container.innerHTML = ""; // Clear old videos
+        container.innerHTML = "";
 
-        if (data.live && data.allowed && data.streams && data.streams.length > 0) {
+        if (data.live && data.allowed && data.streams?.length > 0) {
             status.innerText = `🔴 ${data.streams.length} Live Stream(s) ON`;
 
             data.streams.forEach((stream, index) => {
@@ -49,31 +49,34 @@ async function checkStream() {
                 const hlsUrl = stream.url;
                 const videoId = `video-${index}`;
 
-                // Video wrapper
                 const wrapper = document.createElement("div");
                 wrapper.className = "stream-wrapper";
 
-                // Create video element
-                const videoHTML = `
-                    <video id="${videoId}" class="video-js vjs-default-skin" controls autoplay style="width: 640px; height: 360px;">
-                        <source src="${hlsUrl}" type="application/x-mpegURL">
-                    </video>
+                wrapper.innerHTML = `
+                    <video id="${videoId}" controls autoplay muted style="width: 100%; max-width: 720px; background: black;"></video>
+                    <p><strong>Stream Key:</strong> ${streamKey}</p>
                 `;
-                wrapper.innerHTML = videoHTML;
+
                 container.appendChild(wrapper);
 
-                // Initialize HLS.js for better compatibility
                 const video = document.getElementById(videoId);
+
                 if (Hls.isSupported()) {
                     const hls = new Hls();
                     hls.loadSource(hlsUrl);
                     hls.attachMedia(video);
+                    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                        video.play().catch(err => console.warn("Autoplay failed:", err));
+                    });
+                    hls.on(Hls.Events.ERROR, function (event, data) {
+                        console.error(`HLS error on stream ${streamKey}:`, data);
+                    });
                 } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                     video.src = hlsUrl;
+                    video.addEventListener('loadedmetadata', function () {
+                        video.play().catch(err => console.warn("Autoplay failed:", err));
+                    });
                 }
-
-                // Optional: Init video.js styling
-                videojs(video);
             });
 
         } else if (!data.allowed) {
@@ -84,11 +87,12 @@ async function checkStream() {
 
     } catch (err) {
         document.getElementById("status").innerText = "❌ Error checking stream.";
-        console.error(err);
+        console.error("Stream check failed:", err);
     }
 }
 
-checkStream();  // Initial load
-setInterval(checkStream, 10000);  // Refresh every 10s
+checkStream();
+// setInterval(checkStream, 10000); // Poll every 10s
+
 </script>
 {% endblock %}
