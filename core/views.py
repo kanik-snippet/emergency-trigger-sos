@@ -3980,7 +3980,7 @@ class CheckStreamAPIView(APIView):
 
             for device in devices:
                 stream_key = self.normalize_mac(device.mac_address)
-                hls_url = f"https://ffaf-2409-40d2-204a-717f-7cec-a31e-bcfc-7c01.ngrok-free.app/hls/{stream_key}.m3u8"
+                hls_url = f"https://28ae-2409-40d2-204a-717f-7cec-a31e-bcfc-7c01.ngrok-free.app/hls/{stream_key}.m3u8"
                 print("Checking HLS URL:", hls_url)
 
                 is_live = self.is_stream_live_hls(hls_url)
