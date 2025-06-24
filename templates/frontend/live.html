@@ -134,7 +134,15 @@
             
             // Check if HLS is supported
             if (Hls.isSupported()) {
-                const hls = new Hls();
+                 const hls = new Hls({
+        xhrSetup: function(xhr, url) {
+            // ✅ Bypass ngrok browser warning
+            xhr.setRequestHeader("ngrok-skip-browser-warning", "true");
+
+            // (Optional) Set CORS headers
+            xhr.withCredentials = false;
+        }
+    });
                 hls.loadSource(videoSrc);
                 hls.attachMedia(video);
                 hls.on(Hls.Events.MANIFEST_PARSED, function() {
@@ -142,6 +150,9 @@
                         console.log("Autoplay was prevented. Please interact with the page to start playback.");
                     });
                 });
+                hls.on(Hls.Events.ERROR, function (event, data) {
+        console.error("HLS error on stream:", data);
+    });
             }
             // Fallback for native HLS support
             else if (video.canPlayType('application/vnd.apple.mpegurl')) {
