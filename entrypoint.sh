@@ -12,6 +12,8 @@ echo "MySQL started"
 python manage.py migrate
 django-admin compilemessages
 
+echo "Compiled .mo files:"
+find . -name "*.mo" -exec ls -lh {} \;
 
 # Run APScheduler (if needed)
 python manage.py runapscheduler &
