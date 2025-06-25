@@ -10,7 +10,8 @@ echo "MySQL started"
 
 # Migrate & Compile messages
 python manage.py migrate
-python manage.py compilemessages
+django-admin compilemessages
+
 
 # Run APScheduler (if needed)
 python manage.py runapscheduler &
