@@ -40,63 +40,65 @@ async function checkStream() {
         console.log("API Response:", data);
 
         const container = document.getElementById("video-container");
-        const status = document.getElementById("status");
-        container.innerHTML = "";
+const status = document.getElementById("status");
+container.innerHTML = "";
 
-        if (data.live && data.allowed && data.streams?.length > 0) {
-            status.innerText = `🔴 ${data.streams.length} Live Stream(s) ON`;
+if (data.live && data.allowed && data.streams?.length > 0) {
+    const liveStreams = data.streams.filter(stream => stream.live);
 
-            // Clear interval so it doesn't re-check again
-            if (streamCheckInterval) {
-                clearInterval(streamCheckInterval);
-                streamCheckInterval = null;
-                console.log("✅ Stream found — polling stopped");
-            }
+    status.innerText = `🔴 ${liveStreams.length} Live Stream(s) ON`;
 
-            data.streams.forEach((stream, index) => {
-                const streamKey = stream.stream_key;
-                const hlsUrl = stream.url;
-                const videoId = `video-${index}`;
+    if (streamCheckInterval && liveStreams.length > 0) {
+        clearInterval(streamCheckInterval);
+        streamCheckInterval = null;
+        console.log("✅ Stream found — polling stopped");
+    }
 
-                const wrapper = document.createElement("div");
-                wrapper.className = "stream-wrapper";
+    liveStreams.forEach((stream, index) => {
+        const streamKey = stream.stream_key;
+        const hlsUrl = stream.url;
+        const videoId = `video-${index}`;
 
-                wrapper.innerHTML = `
-                    <video id="${videoId}" controls autoplay muted style="width: 100%; max-width: 720px; background: black;"></video>
-                    <p><strong>Stream Key:</strong> ${streamKey}</p>
-                `;
+        const wrapper = document.createElement("div");
+        wrapper.className = "stream-wrapper";
 
-                container.appendChild(wrapper);
+        wrapper.innerHTML = `
+            <video id="${videoId}" controls autoplay muted style="width: 100%; max-width: 720px; background: black;"></video>
+            <p><strong>Stream Key:</strong> ${streamKey}</p>
+        `;
 
-                const video = document.getElementById(videoId);
+        container.appendChild(wrapper);
 
-                if (Hls.isSupported()) {
-                    const hls = new Hls({
-                        xhrSetup: function (xhr, url) {
-                            xhr.setRequestHeader("ngrok-skip-browser-warning", "true");
-                        }
-                    });
-                    hls.loadSource(hlsUrl);
-                    hls.attachMedia(video);
-                    hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                        video.play().catch(err => console.warn("Autoplay failed:", err));
-                    });
-                    hls.on(Hls.Events.ERROR, function (event, data) {
-                        console.error(`HLS error on stream ${streamKey}:`, data);
-                    });
-                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                    video.src = hlsUrl;
-                    video.addEventListener('loadedmetadata', function () {
-                        video.play().catch(err => console.warn("Autoplay failed:", err));
-                    });
+        const video = document.getElementById(videoId);
+
+        if (Hls.isSupported()) {
+            const hls = new Hls({
+                xhrSetup: function (xhr, url) {
+                    xhr.setRequestHeader("ngrok-skip-browser-warning", "true");
                 }
             });
-
-        } else if (!data.allowed) {
-            status.innerText = "❌ You are not authorized to view streams.";
-        } else {
-            status.innerText = "🔘 No live streams found.";
+            hls.loadSource(hlsUrl);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                video.play().catch(err => console.warn("Autoplay failed:", err));
+            });
+            hls.on(Hls.Events.ERROR, function (event, data) {
+                console.error(`HLS error on stream ${streamKey}:`, data);
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = hlsUrl;
+            video.addEventListener('loadedmetadata', function () {
+                video.play().catch(err => console.warn("Autoplay failed:", err));
+            });
         }
+    });
+
+} else if (!data.allowed) {
+    status.innerText = "❌ You are not authorized to view streams.";
+} else {
+    status.innerText = "🔘 No live streams found.";
+}
+
 
     } catch (err) {
         document.getElementById("status").innerText = "❌ Error checking stream.";
