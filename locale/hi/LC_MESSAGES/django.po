@@ -1419,7 +1419,7 @@ msgid "The Emergency Trigger Solution"
 msgstr "आपातकालीन-बटन समाधान"
 
 #: templates/case_study.html:419
-msgid "Emergency Trigger"
+msgid "Emergency TriggerS"
 msgstr "आपातकालीन-बटन"
 
 #: templates/case_study.html:419
