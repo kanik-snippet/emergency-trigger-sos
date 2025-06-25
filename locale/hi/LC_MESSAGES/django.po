@@ -1522,7 +1522,7 @@ msgstr "बटन दबाएं"
 
 #: templates/case_study.html:466
 msgid ""
-"Press the ICE SOS Button during an emergency to send an immediate alert to "
+"Press the Emergency SOS Trigger during an emergency to send an immediate alert to "
 "pre-configured contacts."
 msgstr ""
 "आपातकाल में आपातकालीन बटन दबाएं, ताकि पूर्व निर्धारित संपर्कों को तुरंत अलर्ट भेजा जा सके।"
@@ -2635,7 +2635,7 @@ msgid "Video not Found!"
 msgstr "वीडियो नहीं मिला!"
 
 #: templates/frontend/pod_detail.html:129
-msgid "Update ICE Button"
+msgid "Update Emergency Trigger"
 msgstr "आपातकालीन-बटन अपडेट करें।"
 
 #: templates/frontend/pod_detail.html:130
@@ -2785,7 +2785,7 @@ msgid "Remote Management"
 msgstr "बटन रिकॉर्डिंग प्रबंधन"
 
 #: templates/frontend/remote.html:16
-msgid "You can watch you Ice Button Video Recording here."
+msgid "You can watch you Emergency Trigger Video Recording here."
 msgstr "यहाँ आपके बटन का वीडियो रिकॉर्डिंग देखा जा सकता है"
 
 #: templates/frontend/remote.html:100
@@ -2843,8 +2843,8 @@ msgid "Add"
 msgstr "जोड़ें"
 
 #: templates/frontend/subscription.html:182 templates/plan_pricing.html:252
-msgid "Ice Button"
-msgstr "Ice Button"
+msgid "Emergency Trigger"
+msgstr "Emergency Trigger"
 
 #: templates/frontend/subscription.html:182 templates/plan_pricing.html:252
 msgid "s"
@@ -2893,7 +2893,7 @@ msgid ""
 msgstr "त्रुटि: आपातकालीन-बटन हॉटस्पॉट से कनेक्ट करने में असमर्थ। कृपया अपना कनेक्शन जांचें।"
 
 #: templates/frontend/wifi.html:158
-msgid "ICE Button Wi-Fi Connection Instructions"
+msgid "Emergency Trigger Wi-Fi Connection Instructions"
 msgstr "आपातकालीन बटन वाई-फाई कनेक्शन निर्देश"
 
 #: templates/legalinfo.html:30
@@ -3544,7 +3544,7 @@ msgstr "स्क्रीन या पुस्तिका में दि�
 #~ msgid "Stream Setup"
 #~ msgstr "स्ट्रीम सेटअप"
 
-#~ msgid "How It Works: ICE Button"
+#~ msgid "How It Works: Emergency Trigger"
 #~ msgstr "कैसे काम करता है: आपातकालीन बटन"
 
 #~ msgid "Seamless Emergency Communication"
@@ -3558,14 +3558,14 @@ msgstr "स्क्रीन या पुस्तिका में दि�
 #~ "आपातकालीन बटन एक भरोसेमंद आपातकालीन संचार प्रणाली है जो तकनीक का उपयोग करके "
 #~ "आपात स्थिति में तेज़ और प्रभावी प्रतिक्रिया सुनिश्चित करता है।"
 
-#~ msgid "Step 1: Set Up Your ICE Button"
+#~ msgid "Step 1: Set Up Your Emergency Trigger"
 #~ msgstr "चरण 1: अपना आपातकालीन बटन सेट करें"
 
 #~ msgid "Device Registration:"
 #~ msgstr "डिवाइस पंजीकरण:"
 
 #~ msgid ""
-#~ "Register your ICE Button using its unique MAC address. Assign a device "
+#~ "Register your Emergency Trigger using its unique MAC address. Assign a device "
 #~ "name and description for easy identification."
 #~ msgstr ""
 #~ "अपने आपातकालीन बटन को इसके MAC पते से पंजीकृत करें। इसे पहचानने के लिए एक नाम और "
@@ -3581,11 +3581,11 @@ msgstr "स्क्रीन या पुस्तिका में दि�
 #~ "अपने SOS संपर्कों के फोन नंबर और ईमेल पते जोड़ें। संपर्कों को उनके ईमेल या फोन नंबर की "
 #~ "पुष्टि करना होगा।"
 
-#~ msgid "Assign Contacts to ICE Button:"
+#~ msgid "Assign Contacts to Emergency Trigger:"
 #~ msgstr "संपर्कों को आपातकालीन बटन से जोड़ें:"
 
 #~ msgid ""
-#~ "Assign verified contacts to the ICE Button to ensure alerts are sent to "
+#~ "Assign verified contacts to the Emergency Trigger to ensure alerts are sent to "
 #~ "appropriate recipients during an emergency."
 #~ msgstr ""
 #~ "सत्यापित संपर्कों को आपातकालीन बटन से जोड़ें ताकि आपातकाल के दौरान सही व्यक्ति को "
@@ -3594,7 +3594,7 @@ msgstr "स्क्रीन या पुस्तिका में दि�
 #~ msgid "Step 2: Trigger an Emergency Alert"
 #~ msgstr "चरण 2: आपातकालीन अलर्ट भेजें"
 
-#~ msgid "Press the ICE Button:"
+#~ msgid "Press the Emergency Trigger:"
 #~ msgstr "आपातकालीन बटन दबाएं:"
 
 #~ msgid ""
@@ -3718,8 +3718,8 @@ msgstr "स्क्रीन या पुस्तिका में दि�
 #~ msgid "Email: legal@Codrenic.com"
 #~ msgstr "ईमेल: legal@Codrenic.com"
 
-#~ msgid "Phone: +91 9910948594"
-#~ msgstr "फोन: +91 9910948594"
+#~ msgid "Phone: +91 7248452001"
+#~ msgstr "फोन: +91 7248452001"
 
 #~ msgid "To meet legal requirements and follow regulations."
 #~ msgstr "कानूनी आवश्यकताओं को पूरा करने और नियमों का पालन करने के लिए।"

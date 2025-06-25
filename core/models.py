@@ -122,7 +122,7 @@ class ContactUs(models.Model):
     organization = models.CharField(max_length=200, blank=True, null=True)  # Organization Name
     email = models.EmailField()  
     phone = models.CharField(max_length=15, blank=True, null=True)  # Phone Number
-    ice_quantity = models.PositiveIntegerField(blank=True, null=True)  # ICE Button Quantity
+    ice_quantity = models.PositiveIntegerField(blank=True, null=True)  # Emergency Trigger Quantity
     installation_date = models.DateField(blank=True, null=True)  # Installation Date
     city = models.CharField(max_length=100, blank=True, null=True)  # City
     subject = models.CharField(max_length=200, blank=True, null=True)  # Subject

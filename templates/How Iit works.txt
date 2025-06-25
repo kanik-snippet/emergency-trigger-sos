@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How It Works: ICE Button</title>
+    <title>How It Works: Emergency Trigger</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -97,18 +97,18 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>How It Works: <span class="highlight">ICE Button</span></h1>
+            <h1>How It Works: <span class="highlight">Emergency Trigger</span></h1>
             <p>Seamless Emergency Communication</p>
         </div>
 
         <!-- Step 1 -->
         <div class="section">
             <div class="section-content">
-                <h2>Step 1: Set Up Your ICE Button</h2>
+                <h2>Step 1: Set Up Your Emergency Trigger</h2>
                 <ul>
-                    <li>Device Registration: Register your ICE Button using its unique MAC address.</li>
+                    <li>Device Registration: Register your Emergency Trigger using its unique MAC address.</li>
                     <li>Add Trusted SOS Contacts: Add phone numbers and email addresses of your SOS contacts.</li>
-                    <li>Assign Contacts to ICE Button: Assign verified contacts to ensure alerts are sent to appropriate recipients during an emergency.</li>
+                    <li>Assign Contacts to Emergency Trigger: Assign verified contacts to ensure alerts are sent to appropriate recipients during an emergency.</li>
                 </ul>
             </div>
             <div class="image-placeholder">
@@ -122,7 +122,7 @@
             <div class="section-content">
                 <h2>Step 2: Trigger an Emergency Alert</h2>
                 <ul>
-                    <li>Press the ICE Button: Activates the emergency alert system, sending notifications to assigned SOS contacts.</li>
+                    <li>Press the Emergency Trigger: Activates the emergency alert system, sending notifications to assigned SOS contacts.</li>
                     <li>Real-Time Streaming: Starts streaming live video and audio from the device via WhatsApp and SMS.</li>
                     <li>Recorded Video Backup: The Raspberry Pi records video locally and sends it to SOS contacts via email post-emergency.</li>
                 </ul>
@@ -183,7 +183,7 @@
         </div>
 
         <div class="footer">
-            <p>© 2025 ICE Button Technology. All rights reserved.</p>
+            <p>© 2025 Emergency Trigger Technology. All rights reserved.</p>
         </div>
     </div>
 </body>

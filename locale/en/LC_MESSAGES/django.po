@@ -1523,10 +1523,10 @@ msgstr "Press the Button"
 
 #: templates/case_study.html:466
 msgid ""
-"Press the ICE SOS Button during an emergency to send an immediate alert to "
+"Press the Emergency SOS Trigger during an emergency to send an immediate alert to "
 "pre-configured contacts."
 msgstr ""
-"Press the ICE SOS Button during an emergency to send an immediate alert to "
+"Press the Emergency SOS Trigger during an emergency to send an immediate alert to "
 "pre-configured contacts."
 
 #: templates/case_study.html:470 templates/tutorials.html:85
@@ -1566,8 +1566,8 @@ msgid "Step 1: Trigger Alerts"
 msgstr "Step 1: Trigger Alerts"
 
 #: templates/case_study.html:486
-msgid "Press the ICE SOS button to initiate emergency notifications."
-msgstr "Press the ICE SOS button to initiate emergency notifications."
+msgid "Press the Emergency SOS Trigger to initiate emergency notifications."
+msgstr "Press the Emergency SOS Trigger to initiate emergency notifications."
 
 #: templates/case_study.html:489
 msgid "Step 2: Send Notifications"
@@ -2639,8 +2639,8 @@ msgid "Video not Found!"
 msgstr ""
 
 #: templates/frontend/pod_detail.html:129
-msgid "Update ICE Button"
-msgstr "Update ICE Button"
+msgid "Update Emergency Trigger"
+msgstr "Update Emergency Trigger"
 
 #: templates/frontend/pod_detail.html:130
 msgid "Update Button details"
@@ -2791,7 +2791,7 @@ msgid "Remote Management"
 msgstr "Remote Management"
 
 #: templates/frontend/remote.html:16
-msgid "You can watch you Ice Button Video Recording here."
+msgid "You can watch you Emergency Trigger Video Recording here."
 msgstr ""
 
 #: templates/frontend/remote.html:100
@@ -2845,8 +2845,8 @@ msgid "Add"
 msgstr "Add"
 
 #: templates/frontend/subscription.html:182 templates/plan_pricing.html:252
-msgid "Ice Button"
-msgstr "Ice Button"
+msgid "Emergency Trigger"
+msgstr "Emergency Trigger"
 
 #: templates/frontend/subscription.html:182 templates/plan_pricing.html:252
 msgid "s"
@@ -2895,7 +2895,7 @@ msgid ""
 msgstr ""
 
 #: templates/frontend/wifi.html:158
-msgid "ICE Button Wi-Fi Connection Instructions"
+msgid "Emergency Trigger Wi-Fi Connection Instructions"
 msgstr ""
 
 #: templates/legalinfo.html:30
@@ -3558,8 +3558,8 @@ msgstr "Follow the configuration steps on the screen or in the manual."
 #~ msgid "Dashboard"
 #~ msgstr "Dashboard"
 
-#~ msgid "How It Works: ICE Button"
-#~ msgstr "How It Works: ICE Button"
+#~ msgid "How It Works: Emergency Trigger"
+#~ msgstr "How It Works: Emergency Trigger"
 
 #~ msgid "Seamless Emergency Communication"
 #~ msgstr "Seamless Emergency Communication"
@@ -3573,17 +3573,17 @@ msgstr "Follow the configuration steps on the screen or in the manual."
 #~ "communication system that integrates advanced technology to ensure rapid "
 #~ "and effective response in critical situations."
 
-#~ msgid "Step 1: Set Up Your ICE Button"
-#~ msgstr "Step 1: Set Up Your ICE Button"
+#~ msgid "Step 1: Set Up Your Emergency Trigger"
+#~ msgstr "Step 1: Set Up Your Emergency Trigger"
 
 #~ msgid "Device Registration:"
 #~ msgstr "Device Registration:"
 
 #~ msgid ""
-#~ "Register your ICE Button using its unique MAC address. Assign a device "
+#~ "Register your Emergency Trigger using its unique MAC address. Assign a device "
 #~ "name and description for easy identification."
 #~ msgstr ""
-#~ "Register your ICE Button using its unique MAC address. Assign a device "
+#~ "Register your Emergency Trigger using its unique MAC address. Assign a device "
 #~ "name and description for easy identification."
 
 #~ msgid "Add Trusted SOS Contacts:"
@@ -3596,21 +3596,21 @@ msgstr "Follow the configuration steps on the screen or in the manual."
 #~ "Add phone numbers and email addresses of your SOS contacts. Contacts must "
 #~ "verify their email or phone numbers through secure links sent to them."
 
-#~ msgid "Assign Contacts to ICE Button:"
-#~ msgstr "Assign Contacts to ICE Button:"
+#~ msgid "Assign Contacts to Emergency Trigger:"
+#~ msgstr "Assign Contacts to Emergency Trigger:"
 
 #~ msgid ""
-#~ "Assign verified contacts to the ICE Button to ensure alerts are sent to "
+#~ "Assign verified contacts to the Emergency Trigger to ensure alerts are sent to "
 #~ "appropriate recipients during an emergency."
 #~ msgstr ""
-#~ "Assign verified contacts to the ICE Button to ensure alerts are sent to "
+#~ "Assign verified contacts to the Emergency Trigger to ensure alerts are sent to "
 #~ "appropriate recipients during an emergency."
 
 #~ msgid "Step 2: Trigger an Emergency Alert"
 #~ msgstr "Step 2: Trigger an Emergency Alert"
 
-#~ msgid "Press the ICE Button:"
-#~ msgstr "Press the ICE Button:"
+#~ msgid "Press the Emergency Trigger:"
+#~ msgstr "Press the Emergency Trigger:"
 
 #~ msgid ""
 #~ "Activates the emergency alert system, sending notifications to assigned "
@@ -3741,5 +3741,5 @@ msgstr "Follow the configuration steps on the screen or in the manual."
 #~ msgid "Email: legal@Codrenic.com"
 #~ msgstr "Email: legal@Codrenic.com"
 
-#~ msgid "Phone: +91 9910948594"
-#~ msgstr "Phone: +91 9910948594"
+#~ msgid "Phone: +91 7248452001"
+#~ msgstr "Phone: +91 7248452001"

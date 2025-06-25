@@ -113,8 +113,8 @@ def log_event(user, message):
     UserLog.objects.create(user=user, log_message=message)
 
 def ice_button_pressed(user, button_name, location):
-    """Log Ice Button pressed event."""
-    message = f"The ICE Button ({button_name}) was pressed at {location}. Emergency protocols are now activated, and our team is taking immediate action to assist you."
+    """Log Emergency Trigger pressed event."""
+    message = f"The Emergency Trigger ({button_name}) was pressed at {location}. Emergency protocols are now activated, and our team is taking immediate action to assist you."
     log_event(user, message)
 
 def password_changed(user):

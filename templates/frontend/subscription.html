@@ -179,7 +179,7 @@ if (currentPage.includes('change_password')) {
                     <ul>
                     <li>${plan.max_emails} {% trans 'Emails' %}</li>
                     <li>${plan.max_phone_numbers} {% trans 'Phone Numbers' %}</li>
-                    <li>{% trans 'Add' %} ${plan.max_button} {% trans 'Ice Button' %}${plan.max_button > 1 ? "{% trans 's' %}" : " {% trans 'Only' %}"}</li>
+                    <li>{% trans 'Add' %} ${plan.max_button} {% trans 'Emergency Trigger' %}${plan.max_button > 1 ? "{% trans 's' %}" : " {% trans 'Only' %}"}</li>
                         <li class="${streamClass}">${liveStreamStatus}</li>
                     </ul>
                     ${buttonHTML}

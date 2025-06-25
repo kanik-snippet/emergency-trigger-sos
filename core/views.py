@@ -1099,7 +1099,7 @@ def send_verification_sms(phone_number, verification_url, user_name,sos_name):
             f"Thank you for helping keep {user_name} safe.\n\n"
             f"Best Regards,\n"
             f"Emergency Trigger Team\n"
-            f"brijk247@gmail.com | +91-9910948594"
+            f"guptakanik280@gmail.com | +91-7248452001"
         )
 
         # Create a Twilio client and send the message.
@@ -1177,7 +1177,7 @@ class VerifyPhoneAPIView(APIView):
                     f"Thank you for helping keep {sos_phone.user.username} safe.\n\n"
                     f"Best,\n"
                     f"Emergency Trigger Team\n"
-                    f"brijk247@gmail.com | +91-9910948594"
+                    f"guptakanik280@gmail.com | +91-7248452001"
                 )
 
                 client.messages.create(
@@ -1653,7 +1653,7 @@ class DeleteSOSContactView(APIView):
                 f"If you have any questions, please contact {user_name} directly.\n\n"
                 f"Best Regards,\n"
                 f"The Emergency Trigger Team\n"
-                f"brijk247@gmail.com | +91-9910948594"
+                f"guptakanik280@gmail.com | +91-7248452001"
             )
 
             # Send email
@@ -3248,8 +3248,8 @@ class AnswerCallView(APIView):
     permission_classes = [AllowAny]
     def post(self, request):
         resp = VoiceResponse()
-        resp.say("Alert! This is an emergency message from ICE Button. "
-                 "Your loved one has triggered the ice button and may need immediate help. "
+        resp.say("Alert! This is an emergency message from Emergency Trigger. "
+                 "Your loved one has triggered the Emergency Trigger and may need immediate help. "
                  "Please check on them as soon as possible. ", 
                  voice="alice", language="en-US")
 
@@ -3552,7 +3552,7 @@ class ContactUsAPIView(APIView):
                     }
             )
             from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list_support = ['brijk247@gmail.com', 'bunnygupta578@gmail.com']
+            recipient_list_support = ['guptakanik280@gmail.com', 'bunnygupta578@gmail.com']
 
             try:
                 # Send email to support
@@ -3609,7 +3609,7 @@ class GetInTouchAPIView(APIView):
     )
     def post(self, request):
         """
-        Create a new GetInTouch entry and send email to brijk247@gmail.com and the user.
+        Create a new GetInTouch entry and send email to guptakanik280@gmail.com and the user.
         """
         serializer = GetInTouchSerializer(data=request.data)
         if serializer.is_valid():
@@ -3631,7 +3631,7 @@ class GetInTouchAPIView(APIView):
                 subject=support_subject,
                 body="New query received from the website.",  # Fallback text-only content
                 from_email=settings.DEFAULT_FROM_EMAIL,
-                to=['brijk247@gmail.com', 'bunnygupta578@gmail.com'],
+                to=['guptakanik280@gmail.com', 'bunnygupta578@gmail.com'],
             )
             support_email.attach_alternative(support_html_content, "text/html")
             support_email.send()

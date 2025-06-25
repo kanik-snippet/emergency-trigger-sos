@@ -174,7 +174,7 @@ def blogGrid(request, category=None, page=1):
 
     print("Rendering the blogGrid template...")
     return render(request, "blogs/blogGrid.html", {
-        'title': translate_text('Blog Grid (ICE Button SOS)', target_language=language) if language != 'en' else 'Blog Grid (ICE Button SOS)',
+        'title': translate_text('Blog Grid (Emergency Trigger SOS)', target_language=language) if language != 'en' else 'Blog Grid (Emergency Trigger SOS)',
         'blog_posts': blog_posts,
         'search_query': search_query,
         'recent_posts': recent_posts,

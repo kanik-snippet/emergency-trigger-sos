@@ -56,7 +56,7 @@
                                         <span>{% if language == 'hi' %}
                                                 {{ post.translated_created_by|default:"ICE बटन टीम" }} {% trans 'By'%}
                                             {% else %}
-                                              {% trans 'By'%}   {{ post.created_by.name|default:"ICE Button Team" }}
+                                              {% trans 'By'%}   {{ post.created_by.name|default:"Emergency Trigger Team" }}
                                             {% endif %}</span>
                                         </div>
                                         <div class="user">
@@ -186,7 +186,7 @@
                             <a href="#"><img src="/static/images/ice_new.png" alt="Business_logo"></a>
                         </div>
                         <div class="wized-body">
-                            <h5 class="title">Get Your ICE Button Now</h5>
+                            <h5 class="title">Get Your Emergency Trigger Now</h5>
                             <a class="rts-btn btn-primary" href="{% url 'ordernow'%}">Order Now</a>
                         </div>
                     </div>
