@@ -1562,7 +1562,7 @@ msgid "Step 1: Trigger Alerts"
 msgstr "चरण 1: अलर्ट शुरू करें"
 
 #: templates/case_study.html:486
-msgid "Press the ICE SOS button to initiate emergency notifications."
+msgid "Press the Emergency SOS Trigger to initiate emergency notifications."
 msgstr "आपातकालीन सूचनाएं शुरू करने के लिए आपातकालीन बटन दबाएं।"
 
 #: templates/case_study.html:489
