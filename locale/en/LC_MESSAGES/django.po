@@ -1418,8 +1418,8 @@ msgid "The Emergency Trigger Solution"
 msgstr "The Emergency Trigger Solution"
 
 #: templates/case_study.html:419
-msgid "Emergency Trigger"
-msgstr "Emergency Trigger"
+msgid "Emergency TriggerS"
+msgstr "Emergency TriggerS"
 
 #: templates/case_study.html:419
 msgid "is an"
