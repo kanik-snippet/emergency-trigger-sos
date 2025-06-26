@@ -130,7 +130,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const video = document.getElementById('hls-video');
             const cleanMac = "{{ clean_mac }}"; 
-            const videoSrc = 'https://c9fa-2401-4900-1c60-c556-142e-4f35-2419-c2e9.ngrok-free.app/hls/{{ clean_mac }}.m3u8'; // Replace with your HLS stream URL
+            const videoSrc = '{{ base_hls_url }}/hls/{{ clean_mac }}.m3u8';
             
             // Check if HLS is supported
             if (Hls.isSupported()) {

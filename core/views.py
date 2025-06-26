@@ -20,7 +20,7 @@ from drf_yasg import openapi
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, generics,serializers
+from rest_framework import status, generics,serializers,permissions
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -53,9 +53,9 @@ from django.utils.translation import gettext as _
 
 # Local App Imports
 from .utils import *
-from core.models import Device,Event,DeviceVideo,SOSEmails,SOSPhones,GetInTouch,NotificationLog,DeviceStream
+from core.models import Device,Event,DeviceVideo,SOSEmails,SOSPhones,GetInTouch,NotificationLog,DeviceStream,NgrokURL
 from customadmin.models import User, PaymentStatus, PaymentMethod,PaymentHistory,Plan,BaseUser,FAQHeading,StaticContent,Subscriber
-from core.serializer import RegistrationSerializer,PlanSerializer,LoginSerializer,PasswordChangeSerializer,CombinedSOSSerializer,CombinedSOSWithCountryCodeSerializer,DeviceRegisterSerializer,SOSContactSerializer,DeviceDetailSerializer,EventSerializer,UserProfileSerializer,DeviceUpdateSerializer,NotificationLogCreateSerializer,NotificationLogSerializer,DeviceSerializer,DeviceVideoSerializer,DeviceVideoListSerializer,ContactUsSerializer,GetInTouchSerializer,FAQHeadingSerializer,StaticContentSerializer,PaymentHistorySerializer,UserLogSerializer,ProfileImageUpdateSerializer
+from core.serializer import RegistrationSerializer,PlanSerializer,LoginSerializer,PasswordChangeSerializer,CombinedSOSSerializer,CombinedSOSWithCountryCodeSerializer,DeviceRegisterSerializer,SOSContactSerializer,DeviceDetailSerializer,EventSerializer,UserProfileSerializer,DeviceUpdateSerializer,NotificationLogCreateSerializer,NotificationLogSerializer,DeviceSerializer,DeviceVideoSerializer,DeviceVideoListSerializer,ContactUsSerializer,GetInTouchSerializer,FAQHeadingSerializer,StaticContentSerializer,PaymentHistorySerializer,UserLogSerializer,ProfileImageUpdateSerializer,NgrokURLSerializer
 # Create your views here.
 
 
@@ -73,9 +73,6 @@ def pod(request):
 
 def log(request):
     return render(request, 'frontend/logs.html')
-
-def live(request):
-    return render(request, 'live.html')
 
 def evlogs(request, event_id):
     # Just render the template and pass the event_id to it
@@ -137,7 +134,13 @@ def legalinfo(request):
 def test(request):
     return render(request, 'test.html')
 def live(request, clean_mac):
-    return render(request, 'frontend/live.html', {'clean_mac': clean_mac})
+    ngrok_obj, _ = NgrokURL.objects.get_or_create(id=1)
+    base_hls_url = ngrok_obj.hls_url.rstrip('/')  # Remove trailing slash agar ho toh
+    
+    return render(request, 'frontend/live.html', {
+        'clean_mac': clean_mac,
+        'base_hls_url': base_hls_url
+    })
 
 def ordernow(request):
     return render(request,'ordernow.html')
@@ -3968,6 +3971,10 @@ class CheckStreamAPIView(APIView):
 
     def get(self, request):
         try:
+            # Fetch latest hls_url base from NgrokURL model
+            ngrok_obj, _ = NgrokURL.objects.get_or_create(id=1)
+            base_hls_url = ngrok_obj.hls_url.rstrip('/')  # Remove trailing slash agar ho toh
+
             devices = Device.objects.filter(user=request.user, device_status='Active')
             if not devices.exists():
                 return Response({
@@ -3980,7 +3987,7 @@ class CheckStreamAPIView(APIView):
 
             for device in devices:
                 stream_key = self.normalize_mac(device.mac_address)
-                hls_url = f"https://c9fa-2401-4900-1c60-c556-142e-4f35-2419-c2e9.ngrok-free.app/hls/{stream_key}.m3u8"
+                hls_url = f"{base_hls_url}/hls/{stream_key}.m3u8"
                 print("Checking HLS URL:", hls_url)
 
                 is_live = self.is_stream_live_hls(hls_url)
@@ -4013,3 +4020,57 @@ class CheckStreamAPIView(APIView):
         except Exception as e:
             print("HLS check error:", e)
             return False
+
+class SuperUserOnly(permissions.BasePermission):
+    """
+    Allow access only to superusers.
+    """
+    def has_permission(self, request, view):
+        return request.user and request.user.is_authenticated and request.user.is_superuser
+
+class NgrokURLView(APIView):
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            return [permissions.IsAdminUser()]  # POST = superuser only
+        return []  # GET = no auth required
+
+    @swagger_auto_schema(
+        operation_description="Fetch the current Ngrok URLs (TCP + HTTP). No authentication required.",
+        responses={
+            200: openapi.Response(
+                description="Ngrok URLs fetched successfully.",
+                schema=NgrokURLSerializer()
+            )
+        }
+    )
+    def get(self, request):
+        obj, created = NgrokURL.objects.get_or_create(id=1)
+        serializer = NgrokURLSerializer(obj)
+        return Response(serializer.data)
+
+    @swagger_auto_schema(
+        operation_description="Update the stored Ngrok TCP & HTTP URLs. Only superusers can update.",
+        request_body=NgrokURLSerializer,
+        responses={
+            200: openapi.Response(description="✅ Ngrok URLs updated successfully."),
+            400: openapi.Response(description="❌ Invalid input data."),
+            401: openapi.Response(description="Unauthorized."),
+            403: openapi.Response(description="Forbidden: Only superusers allowed.")
+        },
+        manual_parameters=[
+            openapi.Parameter(
+                name="Authorization",
+                in_=openapi.IN_HEADER,
+                description="Bearer token for authentication (e.g., Bearer <token>).",
+                type=openapi.TYPE_STRING,
+                required=True,
+            )
+        ]
+    )
+    def post(self, request):
+        obj, created = NgrokURL.objects.get_or_create(id=1)
+        serializer = NgrokURLSerializer(obj, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "✅ Ngrok URLs updated successfully!"}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

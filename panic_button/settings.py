@@ -73,7 +73,7 @@ CSRF_TRUSTED_ORIGINS = [
 # SITE_URL='http://192.168.137.1:8000'
 SITE_URL='https://emergency-trigger-sos-production.up.railway.app'
 # SITE_URL = 'https://stg.Emergency Trigger.com' 
-# SITE_URL = 'http://172.16.6.94:8000'
+# SITE_URL = 'http://192.168.1.2:8000'
 # SITE_URL = 'http://172.16.1.247:8000'
 
 # SITE_URL = config('SITE_URL')

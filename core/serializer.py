@@ -712,3 +712,8 @@ class SOSContactSerializer(serializers.Serializer):
             data["updated_at"] = instance.updated_at.isoformat() if instance.updated_at else None
 
         return data
+
+class NgrokURLSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NgrokURL
+        fields = '__all__'

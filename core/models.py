@@ -175,3 +175,11 @@ class DeviceStream(models.Model):
 
     def __str__(self):
         return f"StreamKey for {self.device.device_name if self.device else 'Unknown Device'}"
+    
+
+class NgrokURL(models.Model):
+    rtmp_url = models.CharField(max_length=200, blank=True, null=True)
+    hls_url = models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return f"RTMP: {self.rtmp_url}, HLS: {self.hls_url}"

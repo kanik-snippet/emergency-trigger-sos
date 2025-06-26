@@ -139,6 +139,8 @@ urlpatterns = [
    path('api/notification-logs/', NotificationLogCreateView.as_view(), name='notification-log-create-api'),
    path('api/upload-video/', DeviceVideoUploadView.as_view(), name='upload-video-api'),
    path('api/answer/', AnswerCallView.as_view(), name='answer-call-api'),
+   path('api/ngrok-url/', NgrokURLView.as_view(), name='ngrok-url'),
+
 
 
 
