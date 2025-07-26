@@ -26,4 +26,5 @@ if [ "$(python manage.py shell -c 'from django.conf import settings; from django
 fi
 
 # Start app
-exec "$@"
+# exec "$@"
+exec gunicorn panic_button.wsgi --bind 0.0.0.0:${PORT:-8000}

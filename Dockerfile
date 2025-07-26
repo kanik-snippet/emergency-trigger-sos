@@ -34,6 +34,6 @@ RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 # Expose Gunicorn port
-EXPOSE 8000
+# EXPOSE 8000
 
-CMD ["gunicorn", "panic_button.wsgi", "--bind", "0.0.0.0:8000"]
+# CMD ["gunicorn", "panic_button.wsgi", "--bind", "0.0.0.0:8000"]
