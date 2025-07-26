@@ -77,7 +77,7 @@ SITE_URL='https://emergency-trigger-sos-production.up.railway.app'
 # SITE_URL = 'http://172.16.1.247:8000'
 
 # SITE_URL = config('SITE_URL')
-STREAM_BASE_URL = config('STREAM_BASE_URL')
+# STREAM_BASE_URL = config('STREAM_BASE_URL')
 
 
 LOGIN_URL = '/'
