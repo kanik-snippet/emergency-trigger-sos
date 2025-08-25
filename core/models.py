@@ -3,6 +3,7 @@ from decouple import config
 from django.db import models
 from customadmin.models import BaseUser
 import paho.mqtt.client as mqtt
+from django.utils import timezone
 
 class Device(models.Model):
     STATUS_CHOICES = [
