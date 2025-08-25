@@ -8,10 +8,13 @@ class Device(models.Model):
         ('Inactive', 'Inactive'),
     ]
 
-    user = models.ForeignKey(BaseUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(BaseUser, on_delete=models.CASCADE, related_name="devices")
     device_name = models.CharField(max_length=255, blank=True)
     mac_address = models.CharField(max_length=17, blank=True, unique=True)
-    message = models.CharField(max_length=50, null=True)
+
+    # message that can be sent to the device
+    message = models.CharField(max_length=255, null=True, blank=True)
+
     description = models.TextField(blank=True, null=True)
     device_status = models.CharField(max_length=8, choices=STATUS_CHOICES, default='Active')
 
@@ -19,11 +22,29 @@ class Device(models.Model):
     sos_emails = models.ManyToManyField('SOSEmails', blank=True, related_name='devices')
     sos_phones = models.ManyToManyField('SOSPhones', blank=True, related_name='devices')
 
+    # New fields for better control
+    is_selected = models.BooleanField(default=False)  # ✅ For notification panel selection
+    last_alert_sent = models.DateTimeField(null=True, blank=True)  # ✅ Track last alert
+    allow_bulk_alert = models.BooleanField(default=True)  # ✅ Allow "send to all"
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.device_name
+        return f"{self.device_name} ({self.mac_address})"
+
+    def send_alert(self, message):
+        """
+        Helper method to trigger an alert to this device.
+        (You can later integrate MQTT publish here)
+        """
+        # Example placeholder
+        from django.utils import timezone
+        self.message = message
+        self.last_alert_sent = timezone.now()
+        self.save(update_fields=["message", "last_alert_sent"])
+        return f"Alert sent to {self.device_name}"
+
     
 class Event(models.Model):
     event_id = models.CharField(max_length=100,unique=True)

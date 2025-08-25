@@ -2665,7 +2665,7 @@ class DeviceListView(APIView):
     permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
-        operation_description="Retrieve a list of devices associated with the logged-in user, along with total counts for devices, notifications, and SOS contacts. Each device includes its own associated SOS contacts.",
+        operation_description="Retrieve a list of devices associated with the logged-in user, along with total counts for devices, notifications, and SOS contacts. Each device includes its own associated SOS contacts and MQTT topic.",
         responses={
             200: openapi.Response(
                 description="List of devices and associated SOS contacts retrieved successfully.",
@@ -2680,6 +2680,7 @@ class DeviceListView(APIView):
                                     'id': openapi.Schema(type=openapi.TYPE_INTEGER, description="Device ID"),
                                     'device_name': openapi.Schema(type=openapi.TYPE_STRING, description="Name of the device"),
                                     'mac_address': openapi.Schema(type=openapi.TYPE_STRING, description="MAC address of the device"),
+                                    'mqtt_topic': openapi.Schema(type=openapi.TYPE_STRING, description="MQTT topic for this device"),
                                     'device_status': openapi.Schema(type=openapi.TYPE_STRING, description="Current status of the device"),
                                     'created_at': openapi.Schema(type=openapi.TYPE_STRING, format='date-time', description="Device creation timestamp"),
                                     'contacts': openapi.Schema(
@@ -2727,8 +2728,8 @@ class DeviceListView(APIView):
             ),
             401: openapi.Response(description="Unauthorized. Access token is missing or invalid.")
         },
-        manual_parameters=[bearer_token],  # Includes the bearer token in the Swagger UI
-        security=[{'Bearer': []}]  # Links the endpoint to the Bearer token for security
+        manual_parameters=[bearer_token],
+        security=[{'Bearer': []}]
     )
     def get(self, request):
         user_devices = Device.objects.filter(user=request.user)
@@ -2736,35 +2737,33 @@ class DeviceListView(APIView):
         # Prepare devices data with associated contacts
         devices_data = []
         for device in user_devices:
-            # Get SOS email and phone contacts assigned to this device
             device_sos_email = device.sos_emails.values('name', 'relation').distinct()
             device_sos_phone = device.sos_phones.values('name', 'relation').distinct()
 
-            # Combine the email and phone contacts for this device
             combined_device_contacts = []
             combined_device_contacts.extend(device_sos_email)
             combined_device_contacts.extend(device_sos_phone)
 
-            # Remove duplicates based on 'name' and 'relation'
-            unique_device_contacts = {f"{contact['name']}-{contact['relation']}": contact for contact in combined_device_contacts}
+            unique_device_contacts = {
+                f"{contact['name']}-{contact['relation']}": contact
+                for contact in combined_device_contacts
+            }
 
-            # Total unique SOS contacts assigned to this device
             total_contacts = len(unique_device_contacts)
 
-            # Append device data with the total unique SOS contacts
             devices_data.append({
                 'id': device.id,
                 'device_name': device.device_name,
                 'mac_address': device.mac_address,
+                'mqtt_topic': device.mqtt_topic,  # ✅ added here
                 'description': device.description,
                 'device_status': device.device_status,
                 'created_at': device.created_at,
-                'total_contacts': total_contacts,  # Total unique SOS contacts for this device
+                'total_contacts': total_contacts,
             })
 
-        # Prepare the final response
         return Response({
-            'devices': devices_data,  # List of devices and their unique SOS contacts
+            'devices': devices_data,
         })
 
 
