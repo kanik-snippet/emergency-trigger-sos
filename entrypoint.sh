@@ -9,6 +9,7 @@
 echo "MySQL started"
 
 # Migrate & Compile messages
+python manage.py makemigrations
 python manage.py migrate
 django-admin compilemessages
 
