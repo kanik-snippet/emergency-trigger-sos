@@ -23,6 +23,7 @@ class Device(models.Model):
     sos_phones = models.ManyToManyField('SOSPhones', blank=True, related_name='devices')
 
     # New fields for better control
+    alert = models.CharField(max_length=255, null=True, blank=True)
     is_selected = models.BooleanField(default=False)  # ✅ For notification panel selection
     last_alert_sent = models.DateTimeField(null=True, blank=True)  # ✅ Track last alert
     allow_bulk_alert = models.BooleanField(default=True)  # ✅ Allow "send to all"

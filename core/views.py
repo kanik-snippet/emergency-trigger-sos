@@ -4112,7 +4112,7 @@ class SendAlertView(APIView):
     )
     def post(self, request):
         device_ids = request.data.get("device_ids")
-        message = "1"  # predefined fixed message
+        alert = "1"  # predefined fixed message
 
         if device_ids == "all":
             devices = Device.objects.filter(user=request.user)
@@ -4121,7 +4121,7 @@ class SendAlertView(APIView):
 
         results = []
         for device in devices:
-            result = device.send_alert(message)
+            result = device.send_alert(alert)
             results.append(result)
 
         return Response({
