@@ -45,7 +45,7 @@ class Device(models.Model):
 
         # MQTT publish
         mqtt_broker =config("MQTT_BROKER")
-        mqtt_port = config("MQTT_PORT", 8883) # default TLS port
+        mqtt_port = config("MQTT_PORT", default=8883, cast=int)  # default TLS port
         mqtt_username =config("MQTT_USERNAME")
         mqtt_password =config("MQTT_PASSWORD")
         use_tls =config("MQTT_USE_TLS", "True") == "True"
