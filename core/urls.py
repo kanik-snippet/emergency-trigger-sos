@@ -140,6 +140,7 @@ urlpatterns = [
    path('api/upload-video/', DeviceVideoUploadView.as_view(), name='upload-video-api'),
    path('api/answer/', AnswerCallView.as_view(), name='answer-call-api'),
    path('api/ngrok-url/', NgrokURLView.as_view(), name='ngrok-url'),
+   path('api/send-alert/', SendAlertView.as_view(), name='send-alert'),
 
 
 

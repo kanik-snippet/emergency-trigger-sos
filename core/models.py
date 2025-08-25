@@ -204,3 +204,5 @@ class NgrokURL(models.Model):
 
     def __str__(self):
         return f"RTMP: {self.rtmp_url}, HLS: {self.hls_url}"
+    
+
