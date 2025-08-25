@@ -1,6 +1,8 @@
 import uuid
+from decouple import config
 from django.db import models
 from customadmin.models import BaseUser
+import paho.mqtt.client as mqtt
 
 class Device(models.Model):
     STATUS_CHOICES = [
@@ -34,17 +36,33 @@ class Device(models.Model):
     def __str__(self):
         return f"{self.device_name} ({self.mac_address})"
 
-    def send_alert(self, message):
-        """
-        Helper method to trigger an alert to this device.
-        (You can later integrate MQTT publish here)
-        """
-        # Example placeholder
-        from django.utils import timezone
-        self.message = message
+    def send_alert(self, alert):
+        # Save locally
+        self.alert = alert
         self.last_alert_sent = timezone.now()
-        self.save(update_fields=["message", "last_alert_sent"])
-        return f"Alert sent to {self.device_name}"
+        self.save(update_fields=["alert", "last_alert_sent"])
+
+        # MQTT publish
+        mqtt_broker =config("MQTT_BROKER")
+        mqtt_port = config("MQTT_PORT", 8883) # default TLS port
+        mqtt_username =config("MQTT_USERNAME")
+        mqtt_password =config("MQTT_PASSWORD")
+        use_tls =config("MQTT_USE_TLS", "True") == "True"
+
+         # MQTT publish
+        mqtt_client = mqtt.Client(client_id=f"alert_{self.mac_address}")
+        if mqtt_username and mqtt_password:
+            mqtt_client.username_pw_set(mqtt_username, mqtt_password)
+        if use_tls:
+            mqtt_client.tls_set()  # Enable TLS if required
+
+        mqtt_client.connect(mqtt_broker, mqtt_port, 60)
+
+        topic = f"device/{self.mac_address}/alert"
+        mqtt_client.publish(topic, payload=alert, qos=1)
+        mqtt_client.disconnect()
+
+        return f"Alert sent to {self.device_name} on topic {topic}"
 
     
 class Event(models.Model):
