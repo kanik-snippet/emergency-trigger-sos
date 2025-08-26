@@ -43,7 +43,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'https://emergency-trigger-sos-production.up.railway.app',
     # 'http://182.72.203.255:8058', 
-    'http://192.168.137.1:8000',
+    # 'http://192.168.137.1:8000',
 ]
 CORS_ALLOW_METHODS = [
     'GET',
@@ -66,12 +66,12 @@ CSRF_TRUSTED_ORIGINS = [
     # 'https://www.stg.Emergency Trigger.com',  
     # 'http://182.72.203.255:8058',
     'https://emergency-trigger-sos-production.up.railway.app/',
-    'http://192.168.137.1:8000/', 
+    # 'http://192.168.137.1:8000/', 
 ]
 
 # SITE_URL = 'https://Emergency Trigger.com' 
 # SITE_URL='http://192.168.137.1:8000'
-# SITE_URL='https://emergency-trigger-sos-production.up.railway.app'
+SITE_URL='https://emergency-trigger-sos-production.up.railway.app'
 # SITE_URL = 'https://stg.Emergency Trigger.com' 
 # SITE_URL = 'http://192.168.1.2:8000'
 # SITE_URL = 'http://172.16.1.247:8000'
@@ -194,27 +194,27 @@ WSGI_APPLICATION = 'panic_button.wsgi.application'
 
 
 # #################### Staging Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'newdb_sos',
-        'USER': 'kanik-snippet',
-        'PASSWORD': 'Snippet@1',
-        # 'HOST': 'db',
-        'HOST':'127.0.0.1',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'newdb_sos',
+#         'USER': 'kanik-snippet',
+#         'PASSWORD': 'Snippet@1',
+#         # 'HOST': 'db',
+#         'HOST':'127.0.0.1',
+#         'PORT': '3306',
+#     }
+# }
 
 
 # #################### Prod Database
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=os.environ.get('DATABASE_URL'),
-#         conn_max_age=600,
-#     )
-# }
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+    )
+}
 
 LANGUAGE_CODE = 'en'  # Default language
 USE_I18N = True  # Enable internationalization
@@ -317,7 +317,7 @@ SWAGGER_SETTINGS = {
             'in': 'header',
         },
     },
-    # 'DEFAULT_API_URL': SITE_URL,
+    'DEFAULT_API_URL': SITE_URL,
 }
 
 
