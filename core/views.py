@@ -4111,18 +4111,32 @@ class SendAlertView(APIView):
         security=[{'Bearer': []}]
     )
     def post(self, request):
+        print("📩 Incoming request data:", request.data)
+        print("👤 Authenticated user:", request.user)
+
         device_ids = request.data.get("device_ids")
+        print("📌 device_ids received:", device_ids)
+
         alert = "1"  # predefined fixed message
+        print("🚨 Alert to send:", alert)
 
         if device_ids == "all":
+            print("🔍 Fetching all devices for user:", request.user)
             devices = Device.objects.filter(user=request.user)
         else:
+            print("🔍 Fetching selected devices:", device_ids)
             devices = Device.objects.filter(user=request.user, id__in=device_ids)
+
+        print("✅ Devices fetched:", list(devices.values_list("id", flat=True)))
 
         results = []
         for device in devices:
+            print(f"➡️ Sending alert to Device {device.id}")
             result = device.send_alert(alert)
+            print(f"📤 Result from Device {device.id}:", result)
             results.append(result)
+
+        print("🎯 Final results:", results)
 
         return Response({
             "status": "success",

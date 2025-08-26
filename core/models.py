@@ -43,15 +43,18 @@ class Device(models.Model):
         self.last_alert_sent = timezone.now()
         self.save(update_fields=["alert", "last_alert_sent"])
 
-        # MQTT publish
-        mqtt_broker =config("MQTT_BROKER")
+        # MQTT configs
+        mqtt_broker = config("MQTT_BROKER")
         mqtt_port = config("MQTT_PORT", default=8883, cast=int)  # default TLS port
-        mqtt_username =config("MQTT_USERNAME")
-        mqtt_password =config("MQTT_PASSWORD")
-        use_tls =config("MQTT_USE_TLS", "True") == "True"
+        mqtt_username = config("MQTT_USERNAME")
+        mqtt_password = config("MQTT_PASSWORD")
+        use_tls = config("MQTT_USE_TLS", "True") == "True"
 
-         # MQTT publish
-        mqtt_client = mqtt.Client(client_id=f"alert_{self.mac_address}")
+        # Normalize MAC (to avoid mismatch)
+        mac = self.mac_address
+
+        # MQTT client
+        mqtt_client = mqtt.Client(client_id=f"alert_{mac}")
         if mqtt_username and mqtt_password:
             mqtt_client.username_pw_set(mqtt_username, mqtt_password)
         if use_tls:
@@ -59,11 +62,17 @@ class Device(models.Model):
 
         mqtt_client.connect(mqtt_broker, mqtt_port, 60)
 
-        topic = f"device/{self.mac_address}/alert"
+        topic = f"device/{mac}/alert"
+        print(f"Publishing to topic: {topic}, payload: {alert}")
+
+        # Use loop to ensure message delivery
+        mqtt_client.loop_start()
         mqtt_client.publish(topic, payload=alert, qos=1)
+        mqtt_client.loop_stop()
         mqtt_client.disconnect()
 
         return f"Alert sent to {self.device_name} on topic {topic}"
+
 
     
 class Event(models.Model):
